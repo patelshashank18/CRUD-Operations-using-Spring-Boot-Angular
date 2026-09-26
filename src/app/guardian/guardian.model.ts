@@ -4,7 +4,7 @@
 export interface Guardian {
 
   /**
-   * Guardian ID.
+   * Guardian ID
    */
   id?: number;
 

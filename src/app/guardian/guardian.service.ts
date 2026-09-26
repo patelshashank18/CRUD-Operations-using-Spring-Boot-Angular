@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Guardian } from './guardian.model';
 
 /**
- * Service used for Guardian API operations.
+ * Service used for Guardian API operations
  */
 @Injectable({
   providedIn: 'root'

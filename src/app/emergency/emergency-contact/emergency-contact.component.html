@@ -1,0 +1,408 @@
+<div class="emergency-container">
+
+    <h2>Emergency Contacts</h2>
+
+    <p class="description">
+        Select a child to view their parents, guardians,
+        and emergency contacts.
+    </p>
+
+    @if (successMessage) {
+
+    <div class="success-message">
+        {{ successMessage }}
+    </div>
+
+    }
+
+    @if (errorMessage) {
+
+    <div class="error-message">
+        {{ errorMessage }}
+    </div>
+
+    }
+
+    <div class="selection-section">
+
+        <div class="form-group">
+
+            <label for="child">
+                Select Child
+            </label>
+
+            <select id="child" [(ngModel)]="selectedChildId" (change)="loadChildData()">
+
+                <option [ngValue]="null">
+                    Select Child
+                </option>
+
+                @for (child of children; track child.id) {
+
+                <option [ngValue]="child.id">
+
+                    {{ child.firstName }}
+                    {{ child.lastName }}
+
+                </option>
+
+                }
+
+            </select>
+
+        </div>
+
+    </div>
+
+    @if (selectedChildId !== null) {
+
+    <div class="guardian-section">
+
+        <h3>Parents / Guardians</h3>
+
+        @if (guardians.length === 0) {
+
+        <p class="empty-message">
+            No guardians are connected to this child.
+        </p>
+
+        } @else {
+
+        <div class="guardian-list">
+
+            @for (
+            guardian of guardians;
+            track guardian.guardianId
+            ) {
+
+            <div class="guardian-card">
+
+                <div class="guardian-info">
+
+                    <h4>
+                        {{ guardian.firstName }}
+                        {{ guardian.lastName }}
+                    </h4>
+
+                    <p>
+                        <strong>Relationship:</strong>
+                        {{ guardian.relationship }}
+                    </p>
+
+                    <p>
+                        <strong>Mobile:</strong>
+                        {{ guardian.mobile }}
+                    </p>
+
+                    @if (guardian.email) {
+
+                    <p>
+                        <strong>Email:</strong>
+                        {{ guardian.email }}
+                    </p>
+
+                    }
+
+                </div>
+
+                <button class="use-button" (click)="
+                  selectedGuardianId = guardian.guardianId;
+                  openAddForm();
+                  selectGuardian()
+                ">
+
+                    Use as Contact
+
+                </button>
+
+            </div>
+
+            }
+
+        </div>
+
+        }
+
+    </div>
+
+    <div class="contact-header">
+
+        <h3>Emergency Contacts</h3>
+
+        @if (!showForm) {
+
+        <button class="add-button" (click)="openAddForm()">
+
+            + Add Emergency Contact
+
+        </button>
+
+        }
+
+    </div>
+
+    @if (showForm) {
+
+    <div class="contact-form">
+
+        @if (editingContactId === null) {
+
+        <h3>Add Emergency Contact</h3>
+
+        @if (guardians.length > 0) {
+
+        <div class="form-group">
+
+            <label for="guardian">
+                Select Parent / Guardian
+            </label>
+
+            <select id="guardian" [(ngModel)]="selectedGuardianId" (change)="selectGuardian()">
+
+                <option [ngValue]="null">
+                    Select Guardian
+                </option>
+
+                @for (
+                guardian of guardians;
+                track guardian.guardianId
+                ) {
+
+                <option [ngValue]="guardian.guardianId">
+
+                    {{ guardian.firstName }}
+                    {{ guardian.lastName }}
+                    -
+                    {{ guardian.relationship }}
+
+                </option>
+
+                }
+
+            </select>
+
+        </div>
+
+        }
+
+        } @else {
+
+        <h3>Edit Emergency Contact</h3>
+
+        }
+
+        <div class="form-group">
+
+            <label for="name">
+                Name
+            </label>
+
+            <input id="name" type="text" [(ngModel)]="contact.name" placeholder="Enter name">
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="relationship">
+                Relationship
+            </label>
+
+            <input id="relationship" type="text" [(ngModel)]="contact.relationship" placeholder="Enter relationship">
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="mobile">
+                Mobile
+            </label>
+
+            <input id="mobile" type="text" [(ngModel)]="contact.mobile" placeholder="Enter mobile number">
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="alternateMobile">
+                Alternate Mobile
+            </label>
+
+            <input id="alternateMobile" type="text" [(ngModel)]="contact.alternateMobile"
+                placeholder="Enter alternate mobile">
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="email">
+                Email
+            </label>
+
+            <input id="email" type="email" [(ngModel)]="contact.email" placeholder="Enter email">
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="priority">
+                Priority
+            </label>
+
+            <input id="priority" type="number" min="1" [(ngModel)]="contact.priority">
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="address">
+                Address
+            </label>
+
+            <textarea id="address" [(ngModel)]="contact.address" placeholder="Enter address">
+          </textarea>
+
+        </div>
+
+        <div class="form-group checkbox-group">
+
+            <label>
+
+                <input type="checkbox" [(ngModel)]="contact.active">
+
+                Active
+
+            </label>
+
+        </div>
+
+        <div class="form-actions">
+
+            @if (editingContactId === null) {
+
+            <button class="save-button" (click)="saveContact()">
+
+                Save Contact
+
+            </button>
+
+            } @else {
+
+            <button class="save-button" (click)="updateContact()">
+
+                Update Contact
+
+            </button>
+
+            }
+
+            <button class="cancel-button" (click)="cancelForm()">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+    }
+
+    @if (loading) {
+
+    <p class="loading-message">
+        Loading emergency contacts...
+    </p>
+
+    } @else if (
+    contacts.length === 0 &&
+    !showForm
+    ) {
+
+    <p class="empty-message">
+        No emergency contacts found for this child.
+    </p>
+
+    } @else {
+
+    <div class="contact-list">
+
+        @for (
+        contact of contacts;
+        track contact.id
+        ) {
+
+        <div class="contact-card">
+
+            <div class="contact-info">
+
+                <h4>
+                    {{ contact.name }}
+                </h4>
+
+                <p>
+                    <strong>Relationship:</strong>
+                    {{ contact.relationship }}
+                </p>
+
+                <p>
+                    <strong>Mobile:</strong>
+                    {{ contact.mobile }}
+                </p>
+
+                @if (contact.alternateMobile) {
+
+                <p>
+                    <strong>Alternate Mobile:</strong>
+                    {{ contact.alternateMobile }}
+                </p>
+
+                }
+
+                @if (contact.email) {
+
+                <p>
+                    <strong>Email:</strong>
+                    {{ contact.email }}
+                </p>
+
+                }
+
+                <p>
+                    <strong>Priority:</strong>
+                    {{ contact.priority }}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    {{ contact.active ? 'Active' : 'Inactive' }}
+                </p>
+
+            </div>
+
+            <div class="contact-actions">
+
+                <button class="edit-button" (click)="editContact(contact)">
+
+                    Edit
+
+                </button>
+
+                <button class="delete-button" (click)="deleteContact(contact.id!)">
+
+                    Delete
+
+                </button>
+
+            </div>
+
+        </div>
+
+        }
+
+    </div>
+
+    }
+
+    }
+
+</div>

@@ -1,13 +1,23 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
+/**
+ * Main application component for ChildCare360.
+ *
+ * Provides the common header, sidebar navigation,
+ * and content area for the application.
+ */
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    RouterOutlet
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'child-management-frontend';
+
 }

@@ -1,0 +1,157 @@
+<div class="relationship-container">
+
+  <h2>Child Guardian Management</h2>
+
+  <p class="description">
+    Connect guardians with children and manage their relationships.
+  </p>
+
+  @if (successMessage) {
+    <div class="success-message">
+      {{ successMessage }}
+    </div>
+  }
+
+  @if (errorMessage) {
+    <div class="error-message">
+      {{ errorMessage }}
+    </div>
+  }
+
+  <div class="selection-section">
+
+    <div class="form-group">
+
+      <label for="child">
+        Select Child
+      </label>
+
+      <select
+        id="child"
+        [(ngModel)]="selectedChildId"
+        (change)="loadConnectedGuardians()">
+
+        <option [ngValue]="null">
+          Select Child
+        </option>
+
+        @for (child of children; track child.id) {
+          <option [ngValue]="child.id">
+            {{ child.firstName }} {{ child.lastName }}
+          </option>
+        }
+
+      </select>
+
+    </div>
+
+    @if (selectedChildId !== null) {
+
+      <div class="form-group">
+
+        <label for="guardian">
+          Select Guardian
+        </label>
+
+        <select
+          id="guardian"
+          [(ngModel)]="selectedGuardianId">
+
+          <option [ngValue]="null">
+            Select Guardian
+          </option>
+
+          @for (guardian of guardians; track guardian.id) {
+            <option [ngValue]="guardian.id">
+              {{ guardian.firstName }}
+              {{ guardian.lastName }}
+              - {{ guardian.relationship }}
+            </option>
+          }
+
+        </select>
+
+      </div>
+
+      <button
+        class="add-button"
+        (click)="addGuardian()">
+        Assign Guardian
+      </button>
+
+    }
+
+  </div>
+
+  @if (selectedChildId !== null) {
+
+    <div class="connected-section">
+
+      <h3>Connected Guardians</h3>
+
+      @if (loading) {
+
+        <p>Loading guardians...</p>
+
+      } @else if (connectedGuardians.length === 0) {
+
+        <p class="empty-message">
+          No guardians are connected to this child.
+        </p>
+
+      } @else {
+
+        <div class="guardian-list">
+
+          @for (
+            guardian of connectedGuardians;
+            track guardian.guardianId
+          ) {
+
+            <div class="guardian-card">
+
+              <div class="guardian-info">
+
+                <h4>
+                  {{ guardian.firstName }}
+                  {{ guardian.lastName }}
+                </h4>
+
+                <p>
+                  <strong>Relationship:</strong>
+                  {{ guardian.relationship }}
+                </p>
+
+                <p>
+                  <strong>Mobile:</strong>
+                  {{ guardian.mobile }}
+                </p>
+
+                @if (guardian.email) {
+                  <p>
+                    <strong>Email:</strong>
+                    {{ guardian.email }}
+                  </p>
+                }
+
+              </div>
+
+              <button
+                class="remove-button"
+                (click)="removeGuardian(guardian.guardianId)">
+                Remove
+              </button>
+
+            </div>
+
+          }
+
+        </div>
+
+      }
+
+    </div>
+
+  }
+
+</div>

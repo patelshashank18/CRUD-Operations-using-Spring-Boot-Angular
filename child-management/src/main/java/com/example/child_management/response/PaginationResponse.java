@@ -1,7 +1,7 @@
 package com.example.child_management.response;
 
 /**
- * Standard pagination response used by ChildCare360 APIs.
+ * Standard pagination response used by ChildCare360 APIs
  *
  * This class contains the actual records along with
  * pagination information.

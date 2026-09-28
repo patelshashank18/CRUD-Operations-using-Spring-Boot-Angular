@@ -1,0 +1,407 @@
+<div class="guardian-container">
+
+    <div class="page-header">
+
+        <h1>Guardians</h1>
+
+        <button class="add-button" (click)="openAddForm()">
+            Add Guardian
+        </button>
+
+    </div>
+
+    @if (successMessage) {
+
+    <p class="success">
+        {{ successMessage }}
+    </p>
+
+    }
+
+    @if (errorMessage) {
+
+    <p class="error">
+        {{ errorMessage }}
+    </p>
+
+    }
+
+    <!-- Search section -->
+    @if (!showAddForm && !showEditForm) {
+
+    <div class="search-container">
+
+        <input
+            type="text"
+            placeholder="Search guardian by name"
+            [(ngModel)]="searchName"
+            (keyup.enter)="searchGuardians()"
+        >
+
+        <button
+            class="search-button"
+            (click)="searchGuardians()"
+        >
+            Search
+        </button>
+
+        <button
+            class="clear-button"
+            (click)="clearSearch()"
+        >
+            Clear
+        </button>
+
+    </div>
+
+    }
+
+    <!-- Add Guardian Form -->
+    @if (showAddForm) {
+
+    <div class="form-container">
+
+        <h2>Add Guardian</h2>
+
+        <form (ngSubmit)="saveGuardian()">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>First Name</label>
+
+                    <input
+                        type="text"
+                        name="addFirstName"
+                        [(ngModel)]="newGuardian.firstName"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Last Name</label>
+
+                    <input
+                        type="text"
+                        name="addLastName"
+                        [(ngModel)]="newGuardian.lastName"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Relationship</label>
+
+                    <input
+                        type="text"
+                        name="addRelationship"
+                        [(ngModel)]="newGuardian.relationship"
+                        placeholder="Father, Mother, Guardian"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Mobile</label>
+
+                    <input
+                        type="text"
+                        name="addMobile"
+                        [(ngModel)]="newGuardian.mobile"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+
+                    <input
+                        type="email"
+                        name="addEmail"
+                        [(ngModel)]="newGuardian.email"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Address</label>
+
+                    <input
+                        type="text"
+                        name="addAddress"
+                        [(ngModel)]="newGuardian.address"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Status</label>
+
+                    <select
+                        name="addActive"
+                        [(ngModel)]="newGuardian.active"
+                        required
+                    >
+
+                        <option [ngValue]="true">
+                            Active
+                        </option>
+
+                        <option [ngValue]="false">
+                            Inactive
+                        </option>
+
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+
+                <button
+                    type="submit"
+                    class="save-button"
+                >
+                    Save
+                </button>
+
+                <button
+                    type="button"
+                    class="cancel-button"
+                    (click)="closeAddForm()"
+                >
+                    Cancel
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    }
+
+    <!-- Edit Guardian Form -->
+    @if (showEditForm) {
+
+    <div class="form-container">
+
+        <h2>Edit Guardian</h2>
+
+        <form (ngSubmit)="updateGuardian()">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>First Name</label>
+
+                    <input
+                        type="text"
+                        name="editFirstName"
+                        [(ngModel)]="editGuardian.firstName"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Last Name</label>
+
+                    <input
+                        type="text"
+                        name="editLastName"
+                        [(ngModel)]="editGuardian.lastName"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Relationship</label>
+
+                    <input
+                        type="text"
+                        name="editRelationship"
+                        [(ngModel)]="editGuardian.relationship"
+                        placeholder="Father, Mother, Guardian"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Mobile</label>
+
+                    <input
+                        type="text"
+                        name="editMobile"
+                        [(ngModel)]="editGuardian.mobile"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+
+                    <input
+                        type="email"
+                        name="editEmail"
+                        [(ngModel)]="editGuardian.email"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Address</label>
+
+                    <input
+                        type="text"
+                        name="editAddress"
+                        [(ngModel)]="editGuardian.address"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Status</label>
+
+                    <select
+                        name="editActive"
+                        [(ngModel)]="editGuardian.active"
+                        required
+                    >
+
+                        <option [ngValue]="true">
+                            Active
+                        </option>
+
+                        <option [ngValue]="false">
+                            Inactive
+                        </option>
+
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+
+                <button
+                    type="submit"
+                    class="save-button"
+                >
+                    Update
+                </button>
+
+                <button
+                    type="button"
+                    class="cancel-button"
+                    (click)="closeEditForm()"
+                >
+                    Cancel
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    }
+
+    <!-- Guardian List -->
+    @if (!showAddForm && !showEditForm) {
+
+    @if (loading || searching) {
+
+    <p class="loading">
+        Loading guardians...
+    </p>
+
+    } @else if (guardians.length === 0) {
+
+    <p class="empty">
+        No guardians found.
+    </p>
+
+    } @else {
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Relationship</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @for (guardian of guardians; track guardian.id) {
+
+                <tr>
+
+                    <td>
+                        {{ guardian.id }}
+                    </td>
+
+                    <td>
+                        {{ guardian.firstName }} {{ guardian.lastName }}
+                    </td>
+
+                    <td>
+                        {{ guardian.relationship }}
+                    </td>
+
+                    <td>
+                        {{ guardian.mobile }}
+                    </td>
+
+                    <td>
+                        {{ guardian.email }}
+                    </td>
+
+                    <td>
+                        {{ guardian.address }}
+                    </td>
+
+                    <td>
+                        {{ guardian.active ? 'ACTIVE' : 'INACTIVE' }}
+                    </td>
+
+                    <td class="actions">
+
+                        <button
+                            class="action-button edit-button"
+                            (click)="openEditForm(guardian.id!)"
+                        >
+                            Edit
+                        </button>
+
+                        <button
+                            class="action-button delete-button"
+                            (click)="deleteGuardian(guardian.id!)"
+                        >
+                            Delete
+                        </button>
+
+                    </td>
+
+                </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    }
+
+    }
+
+</div>

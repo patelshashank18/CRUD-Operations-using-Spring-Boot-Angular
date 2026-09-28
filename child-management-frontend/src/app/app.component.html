@@ -1,0 +1,71 @@
+<div class="app-container">
+
+  <header class="app-header">
+
+    <div class="logo">
+      ChildCare Management
+    </div>
+
+  </header>
+
+  <div class="app-body">
+
+    <aside class="sidebar">
+
+      <nav>
+
+        <a
+          routerLink="/dashboard"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
+
+          Dashboard
+
+        </a>
+
+        <a
+          routerLink="/children"
+          routerLinkActive="active">
+
+          Children
+
+        </a>
+
+        <a
+          routerLink="/guardians"
+          routerLinkActive="active">
+
+          Guardians
+
+        </a>
+
+        <a
+        
+          routerLink="/child-guardians"
+          routerLinkActive="active">
+
+          Child Guardians
+
+        </a>
+
+        <a
+          routerLink="/emergency-contacts"
+          routerLinkActive="active">
+
+          Emergency Contacts
+
+        </a>
+
+      </nav>
+
+    </aside>
+
+    <main class="main-content">
+
+      <router-outlet></router-outlet>
+
+    </main>
+
+  </div>
+
+</div>

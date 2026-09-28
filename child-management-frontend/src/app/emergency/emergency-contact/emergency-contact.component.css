@@ -1,0 +1,183 @@
+.emergency-container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.description {
+    margin-bottom: 25px;
+    color: #666;
+}
+
+.selection-section,
+.guardian-section,
+.contact-form {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.form-group textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkbox-group input {
+    width: auto;
+}
+
+.guardian-list,
+.contact-list {
+    display: grid;
+    gap: 15px;
+}
+
+.guardian-card,
+.contact-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.guardian-card h4,
+.contact-card h4 {
+    margin: 0 0 10px;
+}
+
+.guardian-card p,
+.contact-card p {
+    margin: 5px 0;
+}
+
+.contact-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.contact-header h3 {
+    margin: 0;
+}
+
+.add-button,
+.use-button,
+.save-button,
+.cancel-button,
+.edit-button,
+.delete-button {
+    border: none;
+    padding: 9px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-button {
+    background: #1976d2;
+    color: white;
+}
+
+.use-button {
+    background: #388e3c;
+    color: white;
+}
+
+.save-button {
+    background: #1976d2;
+    color: white;
+}
+
+.cancel-button {
+    background: #757575;
+    color: white;
+}
+
+.edit-button {
+    background: #f57c00;
+    color: white;
+    margin-right: 8px;
+}
+
+.delete-button {
+    background: #d32f2f;
+    color: white;
+}
+
+.contact-actions {
+    display: flex;
+    align-items: center;
+}
+
+.success-message {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.error-message {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    background: #ffebee;
+    color: #c62828;
+}
+
+.empty-message,
+.loading-message {
+    padding: 15px;
+    color: #666;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+}
+
+@media (max-width: 700px) {
+
+    .guardian-card,
+    .contact-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .contact-header {
+        align-items: flex-start;
+        gap: 10px;
+        flex-direction: column;
+    }
+}

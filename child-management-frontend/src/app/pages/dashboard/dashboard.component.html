@@ -1,0 +1,139 @@
+<div class="dashboard-container">
+
+  <h2>ChildCare360 Dashboard</h2>
+
+  <p class="description">
+    Overview of children, guardians, and emergency contacts.
+  </p>
+
+  @if (loading) {
+
+    <p class="loading-message">
+      Loading dashboard...
+    </p>
+
+  } @else if (errorMessage) {
+
+    <div class="error-message">
+      {{ errorMessage }}
+    </div>
+
+  } @else if (dashboard) {
+
+    <div class="statistics-grid">
+
+      <div class="stat-card">
+
+        <h3>Total Children</h3>
+
+        <p class="stat-number">
+          {{ dashboard.children.totalChildren }}
+        </p>
+
+      </div>
+
+      <div class="stat-card">
+
+        <h3>Active Children</h3>
+
+        <p class="stat-number">
+          {{ dashboard.children.activeChildren }}
+        </p>
+
+      </div>
+
+      <div class="stat-card">
+
+        <h3>Inactive Children</h3>
+
+        <p class="stat-number">
+          {{ dashboard.children.inactiveChildren }}
+        </p>
+
+      </div>
+
+      <div class="stat-card">
+
+        <h3>Male Children</h3>
+
+        <p class="stat-number">
+          {{ dashboard.children.maleChildren }}
+        </p>
+
+      </div>
+
+      <div class="stat-card">
+
+        <h3>Female Children</h3>
+
+        <p class="stat-number">
+          {{ dashboard.children.femaleChildren }}
+        </p>
+
+      </div>
+
+      <div class="stat-card">
+
+        <h3>Total Guardians</h3>
+
+        <p class="stat-number">
+          {{ dashboard.guardians.totalGuardians }}
+        </p>
+
+      </div>
+
+      <div class="stat-card">
+
+        <h3>Active Guardians</h3>
+
+        <p class="stat-number">
+          {{ dashboard.guardians.activeGuardians }}
+        </p>
+
+      </div>
+
+      <div class="stat-card">
+
+        <h3>Inactive Guardians</h3>
+
+        <p class="stat-number">
+          {{ dashboard.guardians.inactiveGuardians }}
+        </p>
+
+      </div>
+
+      <div class="stat-card">
+
+        <h3>Total Emergency Contacts</h3>
+
+        <p class="stat-number">
+          {{ dashboard.emergencyContacts.totalEmergencyContacts }}
+        </p>
+
+      </div>
+
+      <div class="stat-card">
+
+        <h3>Active Emergency Contacts</h3>
+
+        <p class="stat-number">
+          {{ dashboard.emergencyContacts.activeEmergencyContacts }}
+        </p>
+
+      </div>
+
+      <div class="stat-card">
+
+        <h3>Inactive Emergency Contacts</h3>
+
+        <p class="stat-number">
+          {{ dashboard.emergencyContacts.inactiveEmergencyContacts }}
+        </p>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>

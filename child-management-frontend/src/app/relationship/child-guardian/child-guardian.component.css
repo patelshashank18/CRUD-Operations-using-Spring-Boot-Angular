@@ -1,0 +1,104 @@
+.relationship-container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.relationship-container h2 {
+  margin-bottom: 5px;
+}
+
+.description {
+  margin-bottom: 25px;
+  color: #666;
+}
+
+.selection-section {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 7px;
+  font-weight: 600;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.add-button,
+.remove-button {
+  border: none;
+  padding: 9px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-button {
+  background: #1976d2;
+  color: white;
+}
+
+.remove-button {
+  background: #d32f2f;
+  color: white;
+}
+
+.connected-section {
+  margin-top: 25px;
+}
+
+.guardian-list {
+  display: grid;
+  gap: 15px;
+}
+
+.guardian-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.guardian-info h4 {
+  margin: 0 0 10px;
+}
+
+.guardian-info p {
+  margin: 5px 0;
+}
+
+.success-message {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.error-message {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  background: #ffebee;
+  color: #c62828;
+}
+
+.empty-message {
+  padding: 15px;
+  color: #666;
+}
